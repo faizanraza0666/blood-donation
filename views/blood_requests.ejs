@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700,900|Ubuntu:400,700" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+        integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="./css/styles.css">
+
+    <title>Blood Inquiries</title>
+</head>
+
+<body
+    style="background-image: url('images/blue-back-2.png'); background-repeat: round; background-size: contain; font-family: 'Montserrat', sans-serif;">
+
+    <section id="title">
+
+        <div class="container-fluid">
+            <nav class="navbar navbar-expand-lg navbar-dark">
+                <a class="navbar-brand" style="color: #2D31FA;" href="firstpage.html"><i
+                        class="fa fa-solid fa-syringe"></i> Blood Bank</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" style="color: #2D31FA;" href="blood_donate.html">Donate</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" style="color: #2D31FA;" href="blood_requests.html">Inquiries</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" style="color: #fff;" href="add_donor.html">Add</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" style="color: #fff;" href="requests.html">Requests</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" style="color: #fff;" href="login.html">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </section>
+
+    <section id="donor">
+
+        <h2 class="section-heading" style="color: #2D31FA;">Add Patient's details here!</h2>
+        <p style="color: #2D31FA;">We will get back to you as soon as possible.</p>
+        <hr style="color: #2D31FA;">
+
+        <div class="row donor-box" style="background-image: url('images/8-83137_light-blue-hd-backgrounds.jpg'); border-radius: 15px 50px; background-size: 100%;">
+            <div class="container-fluid col-lg-6" style="margin-left: 0;">
+                <form method="POST" style="color: #FF1700; font-size: 20px;">
+                    <div class="form-group">
+                        <label><b>Name of the Patient</b></label><br>
+                        <input class="form-control" name="postTitle" type="text" placeholder="Ravi"><br>
+                        <label><b>Contact Info</b></label><br>
+                        <input class="form-control" name="postTitle" type="text" placeholder="+91-98xxxxxxx7"><br>
+                        <label><b>Blood Group</b></label><br>
+                        <input class="form-control" name="postTitle" type="text" placeholder="A+"><br>
+                        <label><b>Number of Packets Required</b></label><br>
+                        <input class="form-control" name="postTitle" type="text" placeholder="5"><br>
+                        <label><b>Address (Permanent/Temporary)</b></label><br>
+                        <input class="form-control" name="postTitle" type="text"
+                            placeholder="Flat/Building/Apartment"><br>
+                        <input class="form-control" name="postTitle" type="text" placeholder="Street/City/Pincode"><br>
+                    </div>
+                    <button class="btn btn-light btn-lg" type="submit" name="button"
+                        style="color: #FF1700;"><b>Post</b></button>
+                </form>
+            </div>
+            <div class="container-fluid col-lg-6">
+                <img src="images/wp4323467.jpg" alt="deposit.jpg" style="border-radius: 50px 15px; width: 100%;">
+            </div>
+        </div>
+    </section>
+
+    <section id="cta">
+
+        <div class="directing row">
+            <div class="col-lg-3">
+                <a href="blood_donate.html">
+                    <button type="button" class="btn btn-light btn-lg download-button"
+                        style="color: #2D31FA;">Donate</button>
+                </a>
+            </div>
+            <div class="col-lg-3">
+                <a href="donor_log.html">
+                    <button type="button" class="btn btn-light btn-lg download-button"
+                        style="color: #2D31FA;">Logs</button>
+                </a>
+            </div>
+            <div class="col-lg-3">
+                <a href="add_donor.html">
+                    <button type="button" class="btn btn-danger btn-lg download-button"
+                        style="color: #fff; background-color: #2D31FA;">Add</button>
+                </a>
+            </div>
+            <div class="col-lg-3">
+                <a href="requests.html">
+                    <button type="button" class="btn btn-primary btn-lg download-button"
+                        style="color: #fff; background-color: #2D31FA;">Requests</button>
+                </a>
+            </div>
+        </div>
+
+    </section>
+
+    <footer id="footer">
+
+        <div>
+            <a href="https://www.facebook.com/officialTIET/" style="color: #fff;"><i
+                    class="fab fa-facebook-f fa-2x social-icon"></i></a>
+            <a href="https://twitter.com/TIETofficial?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor"
+                style="color: #fff;"><i class="fab fa-twitter fa-2x social-icon"></i></a>
+            <a href="https://www.thapar.edu/"><i class="fab fa-chrome fa-2x social-icon"></i></a>
+            <a href="https://www.youtube.com/channel/UCybEMnvVQqGi80wfAd1F8oA"><i
+                    class="fab fa-youtube fa-2x social-icon"></i></a>
+            <p>Copyright</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>
