@@ -24,32 +24,31 @@
     style="background-image: url('images/blue-back-2.png'); background-repeat: no-repeat; background-size: 100%; font-family: 'Montserrat', sans-serif;">
 
     <section id="title">
-
         <div class="container-fluid">
             <nav class="navbar navbar-expand-lg navbar-dark">
-                <a class="navbar-brand" style="color: #2D31FA;" href="firstpage.html"><i
+                <a class="navbar-brand" style="color: #2D31FA;" href="/Homepage?auth=<%- auth %>"><i
                         class="fa fa-solid fa-syringe"></i> Blood Bank</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link" style="color: #2D31FA;" href="blood_donate.html">Donate</a>
+                            <a class="nav-link" style="color: #2D31FA;" href="/BloodDonor?auth=<%- auth %>">Donate</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" style="color: #2D31FA;" href="blood_requests.html">Inquiries</a>
+                            <a class="nav-link" style="color: #2D31FA;" href="/BloodRequests?auth=<%- auth %>">Inquiries</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" style="color: #fff;" href="add_donor.html">Add</a>
+                            <a class="nav-link" style="color: #fff;" href="/AddDonor?auth=<%- auth %>">Add</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" style="color: #fff;" href="requests.html">Requests</a>
+                            <a class="nav-link" style="color: #fff;" href="/Requests?auth=<%- auth %>"> Requests</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" style="color: #fff;" href="login.html">Logout</a>
+                            <a class="nav-link" style="color: #fff;" href="/login">Logout</a>
                         </li>
                     </ul>
                 </div>
@@ -65,45 +64,45 @@
         <div class="row donor-box"
             style="background-image: url('images/10969106.jpg'); background-size: 100%; border-radius: 5px;">
             <table class="table" style="color: #fff;">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Patient Name</th>
-                        <th scope="col">Age</th>
-                        <th scope="col">Diseases</th>
-                        <th scope="col">Blood Group</th>
-                        <th scope="col">Address</th>
-                        <th scope="col">Action</th>
-                    </tr>
-                </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Sujaata</td>
-                        <td>37 Years</td>
-                        <td>N/A</td>
-                        <td>B+</td>
-                        <td>Naala Supaara, Mumbai</td>
-                        <td><button class="btn btn-outline-light">Accept</button> <button class="btn btn-outline-light">Reject</button></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Hardik Pandaya</td>
-                        <td>29 Years</td>
-                        <td>N/A</td>
-                        <td>O+</td>
-                        <td>Flat 34, 13th Floor, Exotic Apartments, Gurugram</td>
-                        <td><button class="btn btn-outline-light">Accept</button> <button class="btn btn-outline-light">Reject</button></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Manikaran</td>
-                        <td>19 Years</td>
-                        <td>Allergic to Fur</td>
-                        <td>AB+</td>
-                        <td>#2981/3, Sector 13C, Chandigarh</td>
-                        <td><button class="btn btn-outline-light">Accept</button> <button class="btn btn-outline-light">Reject</button></td>
-                    </tr>
+                    <div style="display: flex;">
+                        <p style="width: 200px;">
+                            Patient Name
+                        </p>
+                        <p style="width: 200px;">
+                            Blood Group
+                        </p>
+                        <p style="width: 200px;">
+                            Packets No
+                        </p>
+                        <p style="width: 200px;">
+                            Address
+                        </p>
+                    </div>
+                    <% for (let i=0; i < requests.length; i++) { %>
+                        <div style="display: flex;">
+                            <p style="width: 200px;">
+                                <%= requests[i].fullname %>
+                            </p>
+                            <p style="width: 200px;">
+                                <%= requests[i].bgroup %>
+                            </p>
+                            <p style="width: 200px;">
+                                <%= requests[i].cpackets %>
+                            </p>
+                            <p style="width: 200px;">
+                                <%= requests[i].address %>
+                            </p>
+                            <% if (admin) { %>
+                                <form action="/api/notifications/accept/<%= requests[i]._id %>" method="GET" style="padding: 10px;">
+                                    <button type="submit" class="btn btn-primary">Approve</button>
+                                </form>
+                                <form action="/api/notifications/decline/<%= requests[i]._id %>" method="GET">
+                                    <button type="submit" class="btn btn-danger">Reject</button>
+                                </form>
+                            <% } %>
+                        </div>
+                    <% } %>
                 </tbody>
             </table>
         </div>

@@ -30,18 +30,23 @@
         };
     </script>
     <script>
-        console.log(parseJwt("<%- auth %>"))
-        window.localStorage.setItem("auth", "<%- auth %>")
+        console.log(window.location.search)
+        if ("<%- auth %>" && window.location.search !== "?auth=<%- auth %>") {
+            window.location.href = "/Homepage?auth=<%- auth %>"
+        } else if (!"<%- auth %>" && window.location.search === "" && window.localStorage.getItem("auth")) {
+            window.location.href = "/Homepage?auth=" + window.localStorage.getItem("auth")
+        } else if ("<%- auth %>" && window.location.search === "?auth=<%- auth %>") {
+            window.localStorage.setItem("auth", "<%- auth %>")
+        }
     </script>
 </head>
 
 <body style="background-image: url('images/blue-back-2.png'); background-repeat: round; background-size: contain; font-family: 'Montserrat', sans-serif;">
 
     <section id="title">
-
         <div class="container-fluid">
             <nav class="navbar navbar-expand-lg navbar-dark">
-                <a class="navbar-brand" style="color: #2D31FA;" href="firstpage.html"><i class="fa fa-solid fa-syringe"></i> Blood Bank</a>
+                <a class="navbar-brand" style="color: #2D31FA;" href="/Homepage?auth=<%- auth %>"><i class="fa fa-solid fa-syringe"></i> Blood Bank</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -50,16 +55,16 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link" style="color: #2D31FA;" href="/BloodDonor">Donate</a>
+                            <a class="nav-link" style="color: #2D31FA;" href="/BloodDonor?auth=<%- auth %>">Donate</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" style="color: #2D31FA;" href="/BloodRequests">Inquiries</a>
+                            <a class="nav-link" style="color: #2D31FA;" href="/BloodRequests?auth=<%- auth %>">Inquiries</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" style="color: #fff;" href="/AddDonor">Add</a>
+                            <a class="nav-link" style="color: #fff;" href="/AddDonor?auth=<%- auth %>">Add</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" style="color: #fff;" href="/Requests">Requests</a>
+                            <a class="nav-link" style = "color: #fff;" href = "/Requests?auth=<%- auth %>" > Requests</a >
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" style="color: #fff;" href="/login">Logout</a>
@@ -72,7 +77,7 @@
 
     <section id="detailing">
 
-        <h2 class="section-heading" style="color: #2D31FA; text-align: left;">Welcome "Guest Name"</h2>
+        <h2 class="section-heading" style="color: #2D31FA; text-align: left;">Welcome <%- user.name %></h2>
         <hr>
 
         <div class="row" style="font-size: 18px;">
@@ -83,11 +88,16 @@
                         <h3 class="info" style="color: #2D31FA;">Blood Groups</h3>
                     </div>
                     <div class="card-body">
-                        <p>A+ (A Positive)</p>
+                        <% for(var i=0; i<bloodDetails.length; i++){ %>
+                            <h5>
+                                <%= bloodDetails[i].bgroup %>
+                            </h5>
+                        <% } %>
+                        <!-- <p>A+ (A Positive)</p>
                         <p>A- (A Negative)</p>
                         <p>B+ (B Positive)</p>
                         <p>B- (B Negative)</p>
-                        <p>AB+ (AB Positive)</p>
+                        <p>AB+ (AB Positive)</p> -->
                     </div>
                 </div>
             </div>
@@ -98,11 +108,11 @@
                         <h3 class="info" style="color: #2D31FA;">Volume (in Litres)</h3>
                     </div>
                     <div class="card-body">
-                        <p>3</p>
-                        <p>9</p>
-                        <p>7.5</p>
-                        <p>21</p>
-                        <p>2.25</p>
+                        <% for(var i=0; i<bloodDetails.length; i++){ %>
+                            <h5 style="width: 100%;">
+                                <%= bloodDetails[i].tpackets %>
+                            </h5>
+                        <% } %>
                     </div>
                 </div>
             </div>

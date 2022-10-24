@@ -24,32 +24,31 @@
     style="background-image: url('images/blue-back-2.png'); background-repeat: round; background-size: contain; font-family: 'Montserrat', sans-serif;">
 
     <section id="title">
-
         <div class="container-fluid">
             <nav class="navbar navbar-expand-lg navbar-dark">
-                <a class="navbar-brand" style="color: #2D31FA;" href="firstpage.html"><i
+                <a class="navbar-brand" style="color: #2D31FA;" href="/Homepage?auth=<%- auth %>"><i
                         class="fa fa-solid fa-syringe"></i> Blood Bank</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link" style="color: #2D31FA;" href="blood_donate.html">Donate</a>
+                            <a class="nav-link" style="color: #2D31FA;" href="/BloodDonor?auth=<%- auth %>">Donate</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" style="color: #2D31FA;" href="blood_requests.html">Inquiries</a>
+                            <a class="nav-link" style="color: #2D31FA;" href="/BloodRequests?auth=<%- auth %>">Inquiries</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" style="color: #fff;" href="add_donor.html">Add</a>
+                            <a class="nav-link" style="color: #fff;" href="/AddDonor?auth=<%- auth %>">Add</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" style="color: #fff;" href="requests.html">Requests</a>
+                            <a class="nav-link" style="color: #fff;" href="/Requests?auth=<%- auth %>"> Requests</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" style="color: #fff;" href="login.html">Logout</a>
+                            <a class="nav-link" style="color: #fff;" href="/login">Logout</a>
                         </li>
                     </ul>
                 </div>
@@ -65,18 +64,18 @@
 
         <div class="row donor-box" style="background-image: url('images/8-83137_light-blue-hd-backgrounds.jpg'); border-radius: 15px 50px; background-size: 100%;">
             <div class="container-fluid col-lg-6" style="margin-left: 0;">
-                <form method="POST" style="color: #FF1700; font-size: 20px;">
+                <form action="/api/contact/" method="POST" style="color: #FF1700; font-size: 20px;">
                     <div class="form-group">
                         <label><b>Name of the Patient</b></label><br>
-                        <input class="form-control" name="postTitle" type="text" placeholder="Ravi"><br>
+                        <input class="form-control" name="name" type="text" placeholder="Ravi"><br>
                         <label><b>Contact Info</b></label><br>
                         <input class="form-control" name="postTitle" type="text" placeholder="+91-98xxxxxxx7"><br>
                         <label><b>Blood Group</b></label><br>
-                        <input class="form-control" name="postTitle" type="text" placeholder="A+"><br>
+                        <input class="form-control" name="bgroup" type="text" placeholder="A+"><br>
                         <label><b>Number of Packets Required</b></label><br>
-                        <input class="form-control" name="postTitle" type="text" placeholder="5"><br>
+                        <input class="form-control" name="packets" type="text" placeholder="5"><br>
                         <label><b>Address (Permanent/Temporary)</b></label><br>
-                        <input class="form-control" name="postTitle" type="text"
+                        <input class="form-control" name="address" type="text"
                             placeholder="Flat/Building/Apartment"><br>
                         <input class="form-control" name="postTitle" type="text" placeholder="Street/City/Pincode"><br>
                     </div>

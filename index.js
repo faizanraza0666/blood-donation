@@ -2,6 +2,8 @@ const connectToMongo = require("./db");
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const BloodBank = require("./models/bloodbank");
+const Request = require("./models/requests");
 
 const app = express();
 const PORT = 8000;
@@ -13,6 +15,16 @@ app.use(express.json());
 app.use(express.static(__dirname + '/public'));
 
 connectToMongo();
+
+function parseJwt(token) {
+  var base64Url = token.split('.')[1]
+  var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/')
+  var jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+  }).join(''))
+
+  return JSON.parse(jsonPayload)
+};
 
 //available routes
 // app.use("/api/", (req, res) => {
@@ -29,24 +41,50 @@ app.get("/register", function(req, res) {
   res.render('register')
 });
 
-app.get("/Homepage", function(req, res) {
-  res.render('firstpage', {auth: req.query.auth})
+app.get("/Homepage", async function(req, res) {
+  const bloodDetails = await BloodBank.find()
+  let user = {} 
+  if (req.query.auth) {
+    user = parseJwt(req.query.auth)
+  }
+  res.render('firstpage', { auth: req.query.auth, bloodDetails: bloodDetails, user: user })
 });
 
 app.get("/AddDonor", function(req, res) {
-  res.render('add_donor', {id: req.query.id})
+  let user = {}
+  if (req.query.auth) {
+    user = parseJwt(req.query.auth)
+  }
+  res.render('add_donor', { id: req.query.id, auth: req.query.auth })
 });
 
 app.get("/BloodRequests", function(req, res) {
-  res.render('blood_requests')
+  let user = {}
+  if (req.query.auth) {
+    user = parseJwt(req.query.auth)
+  }
+  res.render('blood_requests', { auth: req.query.auth })
 });
 
 app.get("/BloodDonor", function(req, res) {
-  res.render('blood_donate')
+  let user = {}
+  if (req.query.auth) {
+    user = parseJwt(req.query.auth)
+  }
+  res.render('blood_donate', { auth: req.query.auth })
 });
 
-app.get("/Requests", function(req, res) {
-  res.render('requests')
+app.get("/Requests", async function(req, res) {
+  const requests = await Request.find()
+  let user = {}
+  if (req.query.auth) {
+    user = parseJwt(req.query.auth)
+  }
+  let admin = false
+  if (user.email === "455_bt19@iiitkalyani.ac.in") {
+    admin = true
+  }
+  res.render('requests', { requests: requests, user: user, admin: admin, auth: req.query.auth })
 });
 
 app.get('/style.css', function(req, res) {

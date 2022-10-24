@@ -6,14 +6,14 @@ const Request = require("../models/requests");
 
 const router = express.Router();
 
-router.post("/", getToken, (req, res) => {
+router.post("/", (req, res) => {
   Request.create({
     bgroup: req.body.bgroup,
     cpackets: req.body.packets,
     fullname: req.body.name,
     address: req.body.address,
   })
-    .then((details) => res.status(200).json({ success: true, details }))
+    .then((details) => res.redirect("/Requests"))
     .catch((err) =>
       res.status(500).json({ success: false, error: err.message })
     );

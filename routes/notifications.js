@@ -16,7 +16,7 @@ router.get("/", getToken, (req, res) => {
     );
 });
 
-router.get("/accept/:id", getToken, (req, res) => {
+router.get("/accept/:id", (req, res) => {
   const reqID = req.params.id;
   Request.findById(reqID)
     .then((notifs) => {
@@ -33,36 +33,36 @@ router.get("/accept/:id", getToken, (req, res) => {
           BloodBank.updateOne(
             { bgroup: notifs.bgroup },
             {
-              $inc: { tpackets: -1 * parseFloat(notifs.packets) },
+              $inc: { tpackets: -1 * parseFloat(notifs.cpackets) },
             }
           )
             .then((result) => {
               return Request.findByIdAndUpdate(reqID, { rstatus: "Accepted" });
             })
-            .then((result) =>
-              res
-                .status(200)
-                .json({ success: true, message: "Request accepted." })
+            .then(async (result) =>
+              {
+                await Request.deleteOne({ _id: reqID })
+                res.redirect("/Homepage")}
             )
-            .catch((err) =>
-              res.status(500).json({ success: false, error: err.message })
+            .catch((err) =>{
+              console.log(err)
+              res.status(500).json({ success: false, error: err.message })}
             );
         })
-        .catch((err) =>
-          res.status(500).json({ success: false, error: err.message })
+        .catch((err) =>{
+          console.log(err)
+          res.status(500).json({ success: false, error: err.message })}
         );
     })
-    .catch((err) =>
-      res.status(500).json({ success: false, error: err.message })
+    .catch((err) =>{
+      console.log(err)
+    res.status(500).json({ success: false, error: err.message })}
     );
 });
 
-router.get("/decline/:id", getToken, (req, res) => {
-  Request.findByIdAndUpdate(req.params.id, { rstatus: "Declined" })
-    .then((result) => res.status(200).json({ success: true, result }))
-    .catch((err) =>
-      res.status(500).json({ success: false, error: err.message })
-    );
+router.get("/decline/:id", async (req, res) => {
+  await Request.deleteOne({ _id: req.params.id })
+  res.redirect("/Homepage")
 });
 
 module.exports = router;
